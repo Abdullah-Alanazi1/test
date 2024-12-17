@@ -1,0 +1,131 @@
+/* Header Section */
+body {
+  margin: 0;
+  background-color: #ffffff;
+  padding: 10px;
+  font-family: "Roboto-Regular", Helvetica;
+}
+
+.header {
+  display: flex;
+  justify-content: flex-start;
+  padding: 40px;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.logo {
+  font-size: 2rem;
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+}
+.logo-image {
+  width: 50px;
+  height: 50px;
+}
+
+.logo-text {
+  color: #007e85;
+  font-size: 40px;
+  font-family: Lato;
+  font-weight: 600;
+  text-transform: capitalize;
+  word-wrap: normal;
+}
+@media (max-width: 768px) {
+  .header {
+    align-items: center;
+    justify-content: center;
+  }
+  .main {
+    display: grid;
+    text-align: center;
+  }
+  .form-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .form-container form {
+    flex: 1;
+  }
+  button {
+    width: auto;
+    margin-top: 0;
+    margin-left: 20px;
+  }
+  .check-wrapper {
+    margin: auto;
+  }
+}
+/* Main Section */
+.main {
+  width: 80%;
+  padding: 20px;
+  display: block;
+}
+.text-wrapper {
+  margin-bottom: 20px;
+  font-size: 50px;
+  font-family: Roboto;
+  font-weight: 400;
+  word-wrap: normal;
+}
+
+/* Form */
+
+.form-group {
+  margin-bottom: 15px;
+}
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+.form-group input {
+  width: 50%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  box-sizing: border-box;
+}
+.form-group input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+button {
+  padding: 10px;
+  border: none;
+  border-radius: 3px;
+  background: #007e85;
+  box-shadow: 0px 4px 3px rgba(0, 0, 0, 0.25);
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+}
+button:hover {
+  background-color: #005e63;
+}
+
+/* Check-wrapper */
+.check-wrapper {
+  padding-top: 20px;
+  width: 30%;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+a {
+  text-decoration: none;
+  color: grey;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+#password-incorrect {
+  display: none;
+  color: rgb(219, 3, 3);
+  font-size: 0.8rem;
+}

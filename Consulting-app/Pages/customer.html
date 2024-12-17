@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Dashboard</title>
+    <link
+      rel="stylesheet"
+      href="/dashboard-customer/style.css" />
+  </head>
+  <body>
+    <!-- Sidebar Section -->
+    <div class="sidebar">
+      <div>
+        <img
+          src="/dashboard-customer/logo-icon.png"
+          alt="Logo"
+          class="logo" />
+      </div>
+      <div class="nav-items">
+        <button
+          data-section="dashboard"
+          class="nav-button active">
+          <img
+            src="/dashboard-customer/dashboard-icon.png"
+            alt="Dashboard"
+            class="icon" />
+        </button>
+        <button
+          data-section="calendar"
+          class="nav-button">
+          <img
+            src="/dashboard-customer/calendar-icon.png"
+            alt="Calendar"
+            class="icon" />
+        </button>
+
+        <button
+          data-section="settings"
+          class="nav-button">
+          <img
+            src="/dashboard-customer/settings-icon.png"
+            alt="Settings"
+            class="icon" />
+        </button>
+        <button
+          id="logout-button"
+          data-section="logout"
+          class="nav-button logout-button">
+          <img
+            src="/dashboard-customer/logout-icon.png"
+            alt="Logout"
+            class="icon" />
+        </button>
+      </div>
+    </div>
+
+    
+
+    <!-- Main Content Wrapper -->
+    <div class="content-wrapper">
+      
+      <!-- Dashboard Section -->
+      <div
+        id="dashboard"
+        class="content-section">
+        <div class="main-content">
+          <header>
+            <input style="display: none;"
+              type="text"
+              placeholder="Search"
+              class="search-bar" />
+          </header>
+
+          <section class="greeting">
+            <h1>Good Morning <span>Mr. customer!</span></h1>
+
+            <div>
+              <button style="width: 100%;" type="button" id="formButton" onclick="toggleForm()">New +</button>
+          
+              <!-- Unified Form -->
+              <div class="wrapper" id="formWrapper" style="display: none;">
+                <form onsubmit="handleFormSubmit(event)" id="mainForm" method="POST" enctype="application/x-www-form-urlencoded">
+                  <!-- Name and Email -->
+                  <div class="row">
+                    <input type="text" id="name" name="name" placeholder="Name" required />
+                  </div>
+                  <div class="row">
+                    <input type="email" id="email" name="email" placeholder="Email" required />
+                  </div>
+          
+                  <!-- WhatsApp Number -->
+                  <div class="row">
+                    <input type="text" id="whatsappNumber" name="whatsappNumber" placeholder="WhatsApp Number" required />
+                  </div>
+          
+                  <!-- Service Selection -->
+                  <div class="row">
+                    <select name="service" id="service" onchange="handleServiceChange()" required>
+                      <option value="" disabled selected>Select a Service</option>
+                      <option value="cv">Career Consultation CV</option>
+                      <option value="meeting">Career Consultation Meeting</option>
+                      <option value="cover-letter">Career Consultation Cover Letter</option>
+                    </select>
+                  </div>
+          
+                  <!-- Conditional Fields for "Meeting" -->
+                  <div id="meetingDetails" style="display: none;">
+                    <!-- Date -->
+                    <div class="row">
+                      <label for="date">Select a Date:</label>
+                      <input type="date" name="date" id="date" />
+                    </div>
+                    <!-- Time -->
+                    <div class="row">
+                      <label for="time">Select a Time:</label>
+                      <input type="time" name="time" id="time" />
+                    </div>
+                    <!-- Platform -->
+                    <div class="row">
+                      <select name="platform" id="platform">
+                        <option value="" disabled selected>Select a Platform</option>
+                        <option value="zoom">Zoom</option>
+                        <option value="teams">Microsoft Teams</option>
+                        <option value="google-meet">Google Meet</option>
+                      </select>
+                    </div>
+                    <!-- Username in Platform -->
+                    <div class="row">
+                      <input type="text" id="usernamePlatform" name="usernamePlatform" placeholder="Username in Selected Platform" />
+                    </div>
+                  </div>
+          
+                  <!-- User Selection -->
+                  <div class="row">
+                    <select name="user" required>
+                      <option value="" disabled selected>Select a User</option>
+                      <option value="HR.Ali">HR.Ali</option>
+                      <option value="HR.Smith">HR.Smith</option>
+                      <option value="HR.Johnson">HR.Johnson</option>
+                    </select>
+                  </div>
+          
+                  <!-- Message -->
+                  <div class="row">
+                    <textarea name="message" id="message" placeholder="Type your message here..."></textarea>
+                  </div>
+          
+                  <!-- Document URL -->
+                  <div class="row">
+                    <input type="url" id="url" name="url" placeholder="Document URL (Optional)" />
+                  </div>
+          
+                  <!-- Status (Hidden Field) -->
+                  <input type="hidden" id="status"  name="status" value="pending" />
+          
+                  <!-- Form Buttons -->
+                  <div class="row button">
+                    <button type="button" onclick="toggleForm()">Close</button>
+                    <input type="submit" value="Submit" />
+                  </div>
+                </form>
+              </div>
+            </div>
+          
+          </section>
+
+          <!-- client-consultation Section -->
+           
+          <div class="container">
+            <!-- Dynamic Request List for Clients -->
+            <div id="clientRequestContainer">
+              <!-- Sections will be added dynamically -->
+            </div>
+          </div>
+          
+          <!-- Modal for displaying information -->
+          <div id="infoModal" class="modal">
+            <div class="modal-content">
+              <span class="close" onclick="closeInfoModal()">&times;</span>
+              <h2 id="modalHeader">Request Information</h2>
+              <p id="modalDescription">Information will be displayed here.</p>
+            </div>
+          </div>
+          
+
+          </section>
+
+        </div>
+
+        <div class="profile-and-calendar-container">
+          <div class="calendar">
+            <h2 class="clock" id="clock"></h2>
+            <h3 id="dateMain"></h3>     
+
+            <div class="calendar-widget">
+              <table class="currentMonth">
+                <thead>
+                    <tr>
+                        <th>Sun</th>
+                        <th>Mon</th>
+                        <th>Tue</th>
+                        <th>Wed</th>
+                        <th>Thu</th>
+                        <th>Fri</th>
+                        <th>Sat</th>
+                    </tr>
+                </thead>
+                <tbody id="calendarBody">
+                </tbody>
+            </table>
+    
+              <div class="upcoming">
+                <p>Upcoming</p>
+                <div class="upcoming-event">
+                  <span class="event-title">Monthly Client's Meet</span>
+                  <span class="event-date">30 December , 2024 04:00 PM</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      
+      
+          <!-- calendar Section -->
+      <div id="calendar" class="content-section" style="display: none">
+
+        <div class="calendar-container">
+          <div class="calendar-header">
+            
+            <div class="calendar-controls">
+              <div class="nav-arrows">                
+                <button id="prev" class="prev">&#8249;</button>
+                <span id="month-year" class="month-year"></span>
+                <button id="next" class="next">&#8250;</button>
+              </div>
+            </div>
+          </div>
+      
+          <div class="calendar-grid"> 
+                <table>
+                    <tr>
+                        <th>Sun</th>
+                        <th>Mon</th>
+                        <th>Tue</th>
+                        <th>Wed</th>
+                        <th>Thu</th>
+                        <th>Fri</th>
+                        <th>Sat</th>
+                    </tr>
+                  </table>
+                  
+                  
+      
+            <div id="calendar-dates" class="calendar-dates"></div>
+            
+            <div class="upcoming">
+              <p>Upcoming</p>
+              <div class="upcoming-event">
+                <span class="event-title">Monthly Client's Meet</span>
+                <span class="event-date"> </br>8 April, 2022 04:00 PM</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+          </div>
+        </div>
+      </div>
+      
+
+
+      <!-- Settings Section -->
+      <div
+        id="settings"
+        class="content-section"
+        style="display: none">
+        <div
+          id="settingsMainContent"
+          class="main-content">
+          <!-- Display general information about the user -->
+          <div
+            class="profile-info"
+            style="grid-column: 1">
+            <img
+              src="/dashboard-customer/profile-pic.png"
+              alt="Profile Picture"
+              id="profilePicture"
+              class="profile-picture" />
+            <div class="user-info">
+              <h2 id="userName">Mr. Khaled</h2>
+              <p id="jobTitle">customer Specialist</p>
+              <p id="location">Riyadh</p>
+            </div>
+            <div class="contact">
+              <p class="contact"><strong>Contact:</strong></p>
+              <p
+                id="email"
+                class="contact">
+                Mrkhalid876@gmail.com
+              </p>
+              <p
+                id="phone"
+                class="contact">
+                05xxxxxxxx
+              </p>
+            </div>
+          </div>
+
+          <div style="grid-column: 1">
+            <input
+              type="file"
+              id="fileInput"
+              class="input"
+              style="display: none" />
+            <button
+              id="changeImageButton"
+              class="action-button"
+              onclick="triggerFileInput()">
+              Change Picture
+            </button>
+          </div>
+
+          <!-- Display possible options in the settings -->
+          <div
+            class="settings-options"
+            style="grid-column: 1">
+            <div>
+              <p
+                class="option"
+                id="changeName">
+                Change Name
+              </p>
+              <label
+                id="nameLabel"
+                for="newNameInput"
+                class="label"
+                style="display: none"
+                >Name:</label
+              >
+              <input
+                type="text"
+                id="newNameInput"
+                class="input"
+                style="display: none" />
+              <button
+                id="changeNameButton"
+                class="toggle-button on"
+                style="display: none">
+                Change
+              </button>
+              <button
+                id="cancelNameButton"
+                class="toggle-button off"
+                style="display: none">
+                Cancel
+              </button>
+            </div>
+
+            <div>
+              <p
+                class="option"
+                id="changeJob">
+                Change Job Title
+              </p>
+              <label
+                id="jobLabel"
+                for="newJobInput"
+                class="label"
+                style="display: none"
+                >Job Title:</label
+              >
+              <input
+                type="text"
+                id="newJobInput"
+                class="input"
+                style="display: none" />
+              <button
+                id="changeJobButton"
+                class="toggle-button on"
+                style="display: none">
+                Change
+              </button>
+              <button
+                id="cancelJobButton"
+                class="toggle-button off"
+                style="display: none">
+                Cancel
+              </button>
+            </div>
+
+            <div>
+              <p
+                class="option"
+                id="notifications">
+                Notifications
+              </p>
+              <p
+                id="notificationsStatus"
+                style="display: none">
+                Notifications: On
+              </p>
+              <button
+                id="notificationsOn"
+                class="toggle-button on"
+                onclick="setNotifications('On')"
+                style="display: none">
+                On
+              </button>
+              <button
+                id="notificationsOff"
+                class="toggle-button off"
+                onclick="setNotifications('Off')"
+                style="display: none">
+                Off
+              </button>
+            </div>
+
+            <div>
+              <p
+                class="option"
+                id="changeContact">
+                Change Contact
+              </p>
+              <label
+                id="emailLabel"
+                for="newEmailInput"
+                class="label"
+                style="display: none"
+                >Email:</label
+              >
+              <input
+                type="text"
+                id="newEmailInput"
+                class="input"
+                style="display: none" />
+              <label
+                id="phoneLabel"
+                for="newPhoneInput"
+                class="label"
+                style="display: none"
+                >Phone:</label
+              >
+              <input
+                type="text"
+                id="newPhoneInput"
+                class="input"
+                style="display: none" />
+              <button
+                id="changeContactButton"
+                class="toggle-button on"
+                style="display: none">
+                Change
+              </button>
+              <button
+                id="cancelContactButton"
+                class="toggle-button off"
+                style="display: none">
+                Cancel
+              </button>
+            </div>
+
+            <div>
+              <p
+                class="option"
+                id="changeLocation">
+                Change Location
+              </p>
+              <label
+                id="locationLabel"
+                for="newLocationInput"
+                class="label"
+                style="display: none"
+                >Location:</label
+              >
+              <input
+                type="text"
+                id="newLocationInput"
+                class="input"
+                style="display: none" />
+              <button
+                id="changeLocationButton"
+                class="toggle-button on"
+                style="display: none">
+                Change
+              </button>
+              <button
+                id="cancelLocationButton"
+                class="toggle-button off"
+                style="display: none">
+                Cancel
+              </button>
+            </div>
+
+            <div>
+              <p
+                class="option"
+                id="changePassword">
+                Change Password
+              </p>
+              <label
+                id="oldPasswordLabel"
+                for="oldPasswordInput"
+                class="label"
+                style="display: none"
+                >Old Password:</label
+              >
+              <input
+                type="password"
+                id="oldPasswordInput"
+                class="input"
+                style="display: none" />
+              <label
+                id="newPasswordLabel"
+                for="newPasswordInput"
+                class="label"
+                style="display: none"
+                >New Password:</label
+              >
+              <input
+                type="password"
+                id="newPasswordInput"
+                class="input"
+                style="display: none" />
+              <button
+                id="changePasswordButton"
+                class="toggle-button on"
+                style="display: none">
+                Change
+              </button>
+              <button
+                id="cancelPasswordButton"
+                class="toggle-button off"
+                style="display: none">
+                Cancel
+              </button>
+            </div>
+          </div>
+
+          <!-- Display availability and buttons to quickly change the availability status
+                   <div
+            class="availability"
+            style="grid-column: 2">
+            <p
+              id="status"
+              style="padding: 4px; font-size: 20pt">
+              Status: Available
+            </p>
+            <label style="padding: 4px">Availability</label>
+            <button
+              class="toggle-button on"
+              onclick="setStatus('Available')">
+              On
+            </button>
+            <button
+              class="toggle-button off"
+              onclick="setStatus('Busy')">
+              Off
+            </button>
+          </div> 
+          -->
+
+        </div>
+      </div>
+
+      <!-- Logout Section -->
+      <div
+        id="logout"
+        class="content-section"
+        style="display: none">
+        <div
+          id="logoutConfirmation"
+          class="logout-confirmation">
+          <div class="logout-message">
+            <div class="logout-icon">
+              <img
+                src="/dashboard-customer/check-icon.png"
+                alt="Logout Success" />
+            </div>
+            <p>Logout Successful</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Header Icons Section -->
+      <div class="top-right-icons">
+        <div class="header-icons">
+          <div class="icon-container">
+            <div
+              class="dropdown-menu"
+              id="messageDropdown"
+              style="display: none">
+              <p>No new messages</p>
+            </div>
+          </div>
+
+          <div class="icon-container">
+            <button
+              class="icon-button notification-icon"
+              id="notificationButton">
+              <img
+                src="/dashboard-customer/bell-icon.png"
+                alt="Notifications" />
+              <span class="notification-dot"></span>
+            </button>
+            <div
+              class="dropdown-menu"
+              id="notificationDropdown"
+              style="display: none">
+              <p>You have 3 new notifications</p>
+              <ul>
+                <li>New client request</li>
+                <li>Upcoming meeting reminder</li>
+                <li>Profile update confirmed</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="user-profile">
+            <span>Mr. customer</span>
+            <img
+              src="/dashboard-customer/profile-pic.png"
+              alt="Profile Picture"
+              class="profile-pic" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="/dashboard-customer/customer.js"></script>
+  </body>
+</html>

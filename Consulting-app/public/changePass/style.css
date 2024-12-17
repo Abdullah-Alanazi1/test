@@ -1,0 +1,151 @@
+/* Header Section */
+body {
+  margin: 0;
+  background-color: #ffffff;
+  padding: 10px;
+  font-family: "Roboto-Regular", Helvetica;
+}
+
+.header {
+  display: flex;
+  justify-content: flex-start;
+  padding: 40px;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.logo {
+  font-size: 2rem;
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+}
+.logo-image {
+  width: 50px;
+  height: 50px;
+}
+
+.logo-text {
+  color: #007e85;
+  font-size: 40px;
+  font-family: Lato;
+  font-weight: 600;
+  text-transform: capitalize;
+  word-wrap: normal;
+}
+@media (max-width: 768px) {
+  body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  button {
+    width: auto;
+    margin-top: 0;
+  }
+}
+/* Main Section */
+.main {
+  width: 80%;
+  padding: 20px;
+  display: block;
+}
+.text-wrapper {
+  margin-bottom: 20px;
+  font-size: 50px;
+  font-family: Roboto;
+  font-weight: 400;
+  word-wrap: normal;
+}
+
+/* Form */
+
+.form-group {
+  margin-bottom: 15px;
+}
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+.form-group input {
+  width: 50%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  box-sizing: border-box;
+}
+.form-group input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+button {
+  padding: 10px;
+  border: none;
+  border-radius: 3px;
+  background: #007e85;
+  box-shadow: 0px 4px 3px rgba(0, 0, 0, 0.25);
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+}
+button:hover {
+  background-color: #005e63;
+}
+
+.password-container {
+  position: relative;
+}
+
+.password-input {
+  width: 100%;
+  padding: 10px;
+  padding-right: 40px; /* Space for the icon */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 10px;
+  top: 70%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #888;
+}
+
+.toggle-password:hover {
+  color: #000;
+}
+
+#requirements {
+  list-style-type: none;
+  padding: 0;
+}
+#requirements li {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+#requirements li::before {
+  content: "✘";
+  margin-right: 10px;
+  color: red;
+}
+#requirements li.valid::before {
+  content: "✔";
+  color: green;
+}
+#requirements li.valid {
+  color: green;
+}
+#requirements li.invalid {
+  color: red;
+}
+
+form i {
+  margin-left: -30px;
+  cursor: pointer;
+}

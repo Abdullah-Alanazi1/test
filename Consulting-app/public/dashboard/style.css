@@ -1,0 +1,1007 @@
+/* General Reset and Body Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  display: flex;
+  height: 100vh;
+  background-color: #f4f6fa;
+}
+
+/* Container */
+.container {
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+/* Service Section Styles */
+.service-section {
+  margin-bottom: 30px;
+}
+
+.service-section h3 {
+  font-size: 20px;
+  margin-bottom: 15px;
+  color: #555;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 5px;
+}
+
+/* List Styles */
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  padding: 12px 16px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+li:hover {
+  background-color: #f1f1f1;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Buttons */
+button {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+button:hover{
+  transform: scale(1.05);
+}
+
+button.accept {
+  background-color: #4CAF50;
+  color: white;
+}
+
+button.accept:hover {
+  background-color: #45a049;
+  transform: scale(1.05);
+
+}
+
+button.reject {
+  background-color: #f44336;
+  color: white;
+}
+
+button.reject:hover {
+  background-color: #d32f2f;
+  transform: scale(1.05);
+}
+
+/* Status Colors */
+.status {
+  margin-left: 10px;
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.status.pending {
+  background-color: #ffeb3b; /* Yellow for pending */
+  color: #555;
+}
+
+.status.accepted {
+  background-color: #4caf50; /* Green for accepted */
+  color: white;
+}
+
+.status.rejected {
+  background-color: #f44336; /* Red for rejected */
+  color: white;
+}
+
+/* Modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  background-color: #fff;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 75%;
+  max-width: 500px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  text-align: center;
+}
+
+.modal-content h2 {
+  margin: 0 0 10px;
+}
+
+.modal-content .close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.modal-content .close:hover,
+.modal-content .close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+
+/* Sidebar */
+.sidebar {
+  width: 80px;
+  background-color: #0d3a43; /* Darker teal color to match the reference */
+  border-radius: 0 20px 20px 0; /* Rounded corners to match the reference */
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+}
+
+.logo{
+  width: 40px; /* Adjust width as needed */
+  height: auto; /* Maintains aspect ratio */
+  display: block;
+  margin: 0 auto 20px auto; /* Centers the logo and adds space below */
+}
+
+/* Navigation button styling */
+.nav-button {
+  background: none;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  margin-bottom: 15px;
+}
+
+.nav-button.active {
+  background-color: rgba(255, 255, 255, 0.1); /* Highlight effect */
+  border-radius: 8px;
+}
+
+.nav-button .icon {
+  width: 30px;
+  height: auto;
+}
+
+.nav-button:hover {
+  outline: none;
+  background-color: rgba(255, 255, 255, 0.1); /* Highlight effect */
+  border-radius: 8px;
+}
+
+.nav-items {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.nav-item {
+  font-size: 24px;
+  color: #b0c4c8;
+  cursor: pointer;
+}
+
+.nav-item.active {
+  color: white;
+}
+
+/* Content Wrapper for Flex Layout */
+.content-wrapper {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 20px; /* Increased padding for spacing */
+  margin: 0 auto;
+  max-width: 1100px; /* Slightly narrower to better match the reference */
+  background-color: #f4f6fa;
+}
+
+.content-section {
+  display: none;
+}
+
+.content-section#dashboard,
+.content-section#calendar,
+.content-section#clients,
+.content-section#settings {
+  display: flex;
+}
+
+/* Settings Section Styling */
+.profile-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.profile-picture {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-right: 20px;
+}
+
+.user-info h2 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.user-info p {
+  margin: 2px 0;
+  color: #777;
+}
+
+.action-button {
+  background-color: #007e85;
+  color: #fff;
+  padding: 10px 20px;
+  margin-right: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.action-button:hover {
+  background-color: #006c72;
+}
+
+.settings-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.settings-options div {
+  font-size: 16px;
+  cursor: pointer;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.availability {
+  margin-top: 20px;
+}
+
+.toggle-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.toggle-button.on {
+  background-color: #007e85;
+}
+
+.toggle-button.off {
+  background-color: #d9534f;
+}
+
+/* Main Content */
+.main-content {
+  display: flex;
+  flex-direction: column;
+  flex: 0 2 70%; /* Allows main content to take more space relative to calendar */
+  padding-right: 20px; /* Adds spacing on the right */
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Search Bar Styling */
+.search-bar {
+  width: 100%; /* Adjust width as needed */
+  max-width: 400px; /* Limit maximum width */
+  padding: 10px 20px; /* Adds vertical and horizontal padding */
+  border: 1px solid #ccc; /* Light border for subtle outline */
+  border-radius: 20px; /* Makes the edges rounded */
+  font-size: 16px; /* Larger font size */
+  background-color: #f4f6fa; /* Light background color */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  outline: none; /* Removes default outline */
+  color: #333; /* Text color */
+}
+
+/* Placeholder styling */
+.search-bar::placeholder {
+  color: #aaa; /* Light grey color for placeholder text */
+}
+
+.greeting {
+  margin-top: 20px;
+  font-size: 24px;
+  color: #333;
+}
+
+.greeting span {
+  color: #007e85;
+}
+
+/* Client Stats */
+.client-stats {
+  margin-top: 20px;
+  display: flex;
+}
+
+.stats-card {
+  background: linear-gradient(90deg, #007e85 0%, #62d5da 100%);
+  color: white;
+  padding: 20px;
+  border-radius: 8px;
+  flex: 1 1 auto;
+}
+
+.stats-card h2 {
+  font-size: 48px;
+  margin-top: 10px;
+}
+
+.sub-stats {
+  display: flex;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.sub-stats div {
+  background-color: rgba(255, 255, 255, 0.3);
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+  flex: 1;
+}
+
+/* Client Consultation Section */
+.client-consultation {
+  margin-top: 20px;
+  display: flex;
+  gap: 20px;
+}
+
+.client-list, .consultation {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 12px;
+  width: 50%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.client-list h3, .consultation h3 {
+  margin-bottom: 10px;
+}
+
+.client, .consult {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.client-info, .consult-info {
+  font-weight: bold;
+  color: #007e85;
+}
+
+.client-time, .consult-time {
+  color: #ff4d4f;
+}
+
+/* Calendar Container */
+.profile-and-calendar-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+}
+
+/* Profile Header */
+.profile-header {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Centers the profile and name horizontally */
+  margin-bottom: 20px; /* Space between profile header and calendar */
+}
+
+.profile-picture {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-left: 15px; /* Increase spacing between picture and name */
+}
+
+.user-name {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Calendar Section */
+.calendar {
+  width: 100%;
+  height: auto;
+  background-color: #fff;
+  border-radius: 15px;
+  padding: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin-top: 80px;
+  max-width: 300px;
+}
+
+.calendar h3 {
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.calendar-widget table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+  color: #333;
+}
+
+.calendar-widget th, 
+.calendar-widget td {
+  padding: 8px 4px;
+  box-sizing: border-box;
+}
+
+.calendar-widget .highlight {
+  background-color: #007e85;
+  color: white;
+  border-radius: 50%;
+  padding: 8px;
+  display: inline-block;
+}
+
+.upcoming {
+  margin-top: 10px;
+}
+
+.upcoming p {
+  font-weight: bold;
+}
+
+.upcoming-event {
+  background-color: #e6f7f8;
+  padding: 10px;
+  border-radius: 8px;
+  margin-top: 5px;
+}
+
+.event-title {
+  font-weight: bold;
+  color: #007e85;
+}
+
+.event-date {
+  display: block;
+  color: #777;
+  margin-top: 5px;
+}
+
+
+/* Header Icons */
+.header-icons {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.icon-container {
+  position: relative;
+}
+
+.icon-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.notification-dot {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 8px;
+  height: 8px;
+  background-color: #ff4500; /* Orange notification dot */
+  border-radius: 50%;
+}
+
+/* Dropdown Menu Styling */
+.dropdown-menu {
+  position: absolute;
+  top: 35px; /* Positions the dropdown below the icon */
+  right: 0;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  width: 200px;
+  z-index: 1000;
+}
+
+.dropdown-menu p {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.dropdown-menu ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.dropdown-menu ul li {
+  padding: 5px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.dropdown-menu ul li:last-child {
+  border-bottom: none;
+}
+
+/* User Profile Styling */
+.user-profile {
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+  background-color: #f4f4f4;
+  border-radius: 20px;
+  font-size: 14px;
+}
+
+.profile-pic {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  margin-right: 8px;
+  margin-left: 8px;
+}
+
+/* Calendar Container */
+.calendar-container {
+  min-width: 600px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  flex: 0 2 70%; /* Allows main content to take more space relative to calendar */
+  padding-right: 20px; /* Adds spacing on the right */
+  cursor: default;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.calendar-header h2 {
+  font-size: 24px;
+  color: #333;
+}
+
+.calendar-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.month-year {
+  font-size: 16px;
+  color: #777;
+}
+
+.nav-arrows button {
+  background: none;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  color: #333;
+  border: none;
+  cursor: pointer;
+  padding: 10px 20px;
+}
+
+
+
+/* Calendar Container */
+.calendar-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+/* Header Section */
+.calendar-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Month and Year Display */
+.month-year {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* Calendar Grid */
+.calendar-grid {
+  display: grid;
+  gap: 10px;
+  text-align: center;
+  width: 100%;
+}
+
+
+
+/* Calendar Date */
+.calendar-date {
+  padding: 15px 0;
+  color: #333;
+  font-size: 14px;
+  cursor: pointer;
+  position: relative;
+}
+
+/* Event Dates */
+.calendar-date.event {
+  color: #333;
+  font-weight: bold;
+}
+
+/* Adding an Indicator for Events */
+.calendar-date.event::after {
+  content: '';
+  width: 8px;
+  height: 8px;
+  background-color: red;
+  border-radius: 50%;
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Hover Effect on Calendar Dates */
+.calendar-date:hover {
+  background-color: #f0f0f0;
+  border-radius: 5px;
+}
+.calendar-dates {
+  display: grid; /* Use grid layout for days of the month */
+  grid-template-columns: repeat(7, 1fr); /* 7 columns for each day of the week */
+  gap: 10px; /* Space between the date cells */
+  padding: 10px;
+  width: 100%; /* Ensure the container takes full width */
+  
+}
+
+/* Responsive Adjustment for Small Screens */
+@media (max-width: 600px) {
+  .calendar-grid {
+    grid-template-columns: repeat(7, 1fr); /* Ensure 7 columns on smaller screens */
+  }
+
+  .calendar-date {
+    padding: 10px 0;
+  }
+}
+
+/* Upcoming Section */
+.upcoming-section {
+  margin-top: 40px;
+}
+
+.upcoming-section h2 {
+  font-size: 20px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.upcoming-event {
+  display: flex;
+  align-items: center;
+  background-color: #ccf9fc;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.event-icon {
+  width: 40px;
+  height: 40px;
+  background-color: #007e85;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.event-details {
+  color: #333;
+}
+
+.event-title {
+  font-weight: bold;
+  margin: 0;
+}
+
+.event-date {
+  font-size: 14px;
+  color: #777;
+}
+
+.view-all {
+  text-align: right;
+  display: block;
+  color: #007e85;
+  font-size: 14px;
+  margin-top: 10px;
+  text-decoration: none;
+}
+
+
+.top-right-icons {
+  position: absolute;
+  top: 20px; /* Adjust distance from the top */
+  right: 20px; /* Adjust distance from the right */
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Space between icons */
+}
+
+/* Logout Confirmation Styling */
+.logout-confirmation {
+  display: none; /* Hidden by default */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.3); /* Light overlay */
+  z-index: 1000; /* Ensure it’s on top of other content */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logout-message {
+  text-align: center;
+  background-color: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.logout-icon img {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 20px;
+}
+
+.logout-message p {
+  font-size: 24px;
+  color: #333;
+}
+
+/* Clients Section */
+#clients {  
+  font-size: 20pt; 
+  margin-top: 120px;
+  }
+  
+/* Settings Section */
+
+.settings-options .toggle-button{
+  display: inline-block;
+  margin-top: 5px;
+}
+  
+.input{
+	margin: 5px;
+}
+  
+.label{
+  margin: 5px;
+}
+  
+.toggle-button.on:hover {
+  background-color: #006678; /* Darker shade of the on color */
+}
+
+.toggle-button.off:hover {
+  background-color: #993333; /* Darker shade of the off color */
+}
+   
+#profilePicture { 
+  width: 115px; 
+  height: 115px; 
+}
+   
+.option{
+  font-size:20pt;
+}
+   
+#changeImageButton{
+  text-align: center;
+  font-size: 15pt;
+  padding: 10px;
+}
+    
+#settingsMainContent {
+  margin-top: 100px;
+  margin-left: 60px;
+  display: grid;
+  grid-template-columns: 600px 250px;
+  column-gap: 200px;
+}
+   
+.contact{
+  padding:10px;
+  padding-left:30px;
+}
+   
+.contact p{
+  padding:1px;
+}
+
+.clock {
+  font-size: 48px;
+  color: #000000;
+  font-weight: bold;
+  text-align: center;
+}
+
+.wrapper {
+  max-width: 500px;
+  width: 100%;
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 0px 4px 10px 1px rgba(0, 0, 0, 0.1);
+  position:absolute ;
+}
+
+.wrapper .title {
+  height: 120px;
+  background: #007e85;
+  border-radius: 5px 5px 0 0;
+  color: #fff;
+  font-size: 30px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wrapper form {
+  padding: 25px 35px;
+}
+
+.wrapper form .row {
+  margin-top: 15px;
+  position: relative;
+}
+
+.wrapper form .row input,
+.wrapper form .row select,
+.wrapper form .row textarea {
+  width: 100%;
+  outline: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  border: 1px solid lightgrey;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+form .row input:focus,
+form .row select:focus,
+form .row textarea:focus {
+  border-color: #007e85;
+}
+
+form .row input::placeholder,
+form .row textarea::placeholder {
+  color: #999;
+}
+
+.wrapper form .row i {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  color: #007e85;
+  font-size: 22px;
+}
+
+form .row select {
+  appearance: none;
+  padding-left: 45px;
+  cursor: pointer;
+}
+
+form .textarea-label,
+form .upload-label {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 5px;
+  display: block;
+}
+
+form .row textarea {
+  resize: vertical;
+  height: 80px;
+}
+
+form .row button,button,
+form .row input[type="submit"] {
+  margin-top: 20px;
+  color: #fff;
+  font-size: 18px;wrapper
+  font-weight: 500;
+  background: #007e85;
+  border: none;
+  cursor: pointer;
+  padding: 10px 20px;
+}
+
+form .row button:hover,
+form .row input[type="submit"]:hover {
+  background: #016368;
+}
+
+
+
