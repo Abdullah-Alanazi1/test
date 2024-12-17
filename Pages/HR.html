@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Dashboard</title>
+    <link
+      rel="stylesheet"
+      href="/dashboard/style.css" />
+  </head>
+  <body>
+    <!-- Sidebar Section -->
+    <div class="sidebar">
+      <div>
+        <img
+          src="/dashboard/logo-icon.png"
+          alt="Logo"
+          class="logo" />
+      </div>
+      <div class="nav-items">
+        <button
+          data-section="dashboard"
+          class="nav-button active">
+          <img
+            src="/dashboard/dashboard-icon.png"
+            alt="Dashboard"
+            class="icon" />
+        </button>
+        <button
+          data-section="calendar"
+          class="nav-button">
+          <img
+            src="/dashboard/calendar-icon.png"
+            alt="Calendar"
+            class="icon" />
+        </button>
+
+        <button
+          data-section="settings"
+          class="nav-button">
+          <img
+            src="/dashboard/settings-icon.png"
+            alt="Settings"
+            class="icon" />
+        </button>
+        <button
+          id="logout-button"
+          data-section="logout"
+          class="nav-button logout-button">
+          <img
+            src="/dashboard/logout-icon.png"
+            alt="Logout"
+            class="icon" />
+        </button>
+      </div>
+    </div>
+
+    
+
+    <!-- Main Content Wrapper -->
+    <div class="content-wrapper">
+      
+      <!-- Dashboard Section -->
+      <div
+        id="dashboard"
+        class="content-section">
+        <div class="main-content">
+          <header>
+            <input style="display: none;"
+              type="text"
+              placeholder="Search"
+              class="search-bar" />
+          </header>
+
+          <section class="greeting">
+            <h1>Good Morning <span>Mr. Khaled!</span></h1>
+
+
+            <div>
+              <button style="width: 100%;display: none;" type="button" id="formButton" onclick="openForm()"> new + </button>
+  
+
+              <!-- Sub-page 1: Service Selection -->
+              <div class="wrapper" id="page1" style="display: none;">
+                <form action="#" id="form1" enctype="multipart/form-data">
+                  <!-- Email and Name Field -->
+                  <div class="row">
+                    <i class="fas fa-user"></i>
+                    <input type="text" placeholder="Name" required />
+                  </div>
+                  <div class="row">
+                    <i class="fas fa-user"></i>
+                    <input type="text" placeholder="Email" required />
+                  </div>
+
+                                    <!-- whatsapp Number Selection -->
+                                    <div class="row">
+                                      <input type="number" id="whatsapp" placeholder="Confirm your Whatsapp number to contact" name="whatsappNumber" required />
+                                    </div>
+            
+                  <!-- Service Selection -->
+                  <div class="row">
+                    <i class="fas fa-clipboard-list"></i>
+                    <select id="service" name="service" onchange="handleServiceChange()" required>
+                      <option value="" disabled selected>Select a Service</option>
+                      <option value="cv">Career Consultation CV</option>
+                      <option value="meeting">Career Consultation Meeting</option>
+                      <option value="cover-letter">Career Consultation Cover Letter</option>
+                    </select>
+                  </div>
+            
+                  <div class="row">
+                    <i class="fas fa-users"></i>
+                    <select id="user" name="user" required>
+                      <option value="" disabled selected>Choice a person</option><!-- case HR->show clients and the opposite is correct  -->
+                      <!-- Example Users -->
+                      <option value="user1">HR.Ali</option>
+                      <option value="user2">HR. Smith</option>
+                      <option value="user3">HR.Johnson</option>
+                    </select>
+                  </div>
+                  
+            
+                  <!-- Message Textarea -->
+                  <div class="row">
+                    <label for="message" class="textarea-label">Message:</label>
+                    <textarea id="message" name="message" placeholder="Type your message here..." rows="10"></textarea>
+                  </div>
+            
+                  <!-- url -->
+                  <div class="row">
+                    <label for="document" class="upload-label">Upload Document (Optional):</label>
+                    <input type="url" id="document" name="document" accept=".url" />
+                  </div>
+            
+                  <!-- Buttons -->
+                  <div class="row button">
+                    <button type="button" id="clodeBtn" onclick="openForm()">close</button>
+                    <button type="button" id="nextButton" onclick="goToPage2()" style="display: none;">Next</button>
+                    <input type="submit" value="Submit" id="submitButton" />
+                  </div>
+                </form>
+              </div>
+            
+              <!-- Sub-page 2: Date and Time Selection -->
+            
+              <div class="wrapper" id="page2" style="display: none;">
+                <form action="#" id="form2">
+                  <!-- Date Selection -->
+                  <div class="row">
+                    <label for="date" class="textarea-label">Select a Date:</label>
+                    <input type="date" id="date" name="date" required oninput="validateDate(this.value)" />
+                  </div>
+                  
+                  <!-- Time Selection -->
+                  <div class="row">
+                    <label for="time" class="textarea-label">Select a Time:</label>
+                    <input type="time" id="time" name="time" required oninput="validateTime(this.value)" />
+                  </div>
+                  
+                  <!-- platform Selection -->
+                  <div class="row">
+                    <select id="platform" name="platform" required>
+                       <option value="" disabled selected>Select platform for the meeting</option>
+                        <option value="zoom">Zoom</option>
+                         <option value="teams">Microsoft Teams</option>
+                          <option value="google-meet">Google Meet</option>
+                         </select>
+                  <!-- Username Selection -->
+                         <div class="row">
+                          <input type="text" id="usernamePlatform" placeholder="Username in selected platform" name="usernamePlatform" required />
+                        </div>
+
+                        
+                  
+            
+                  <!-- Buttons -->
+                  <div class="row button">
+                    <button type="button" onclick="goToPage1()">Back</button>
+                    <button type="button" id="clodeBtn" onclick="openForm()">close</button>
+                    <input type="submit" value="Submit"/>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+
+          
+
+
+
+
+          <!-- client-consultation Section -->
+           
+          <div id="list" style="width: 90%;" class="container">
+            <!-- Dynamic Service Request List -->
+            <div id="serviceContainer">
+              <!-- Sections will be added dynamically -->
+            </div>
+          </div>
+          
+          <!-- Modal for details -->
+          <div id="modal" class="modal">
+            <div class="modal-content">
+              <span class="close" onclick="closeModal()">&times;</span>
+              <h2 id="modalTitle">Request Details</h2>
+              <p id="modalBody">Details will appear here.</p>
+            </div>
+          </div>
+          
+
+          </section>
+
+        </div>
+
+        <div class="profile-and-calendar-container">
+          <div class="calendar">
+            <h2 class="clock" id="clock"></h2>
+            <h3 id="dateMain"></h3>     
+
+            <div class="calendar-widget">
+              <table class="currentMonth">
+                <thead>
+                    <tr>
+                        <th>Sun</th>
+                        <th>Mon</th>
+                        <th>Tue</th>
+                        <th>Wed</th>
+                        <th>Thu</th>
+                        <th>Fri</th>
+                        <th>Sat</th>
+                    </tr>
+                </thead>
+                <tbody id="calendarBody">
+                </tbody>
+            </table>
+    
+              <div class="upcoming">
+                <p>Upcoming</p>
+                <div class="upcoming-event">
+                  <span class="event-title">Monthly Client's Meet</span>
+                  <span class="event-date">31 December tue, 2024 04:00 PM</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      
+      
+          <!-- calendar Section -->
+      <div id="calendar" class="content-section" style="display: none">
+
+        <div class="calendar-container">
+          <div class="calendar-header">
+            
+            <div class="calendar-controls">
+              <div class="nav-arrows">                
+                <button id="prev" class="prev">&#8249;</button>
+                <span id="month-year" class="month-year"></span>
+                <button id="next" class="next">&#8250;</button>
+              </div>
+            </div>
+          </div>
+      
+          <div class="calendar-grid"> 
+                <table>
+                    <tr>
+                        <th>Sun</th>
+                        <th>Mon</th>
+                        <th>Tue</th>
+                        <th>Wed</th>
+                        <th>Thu</th>
+                        <th>Fri</th>
+                        <th>Sat</th>
+                    </tr>
+                  </table>
+                  
+                  
+      
+            <div id="calendar-dates" class="calendar-dates"></div>
+            
+            <div class="upcoming">
+              <p>Upcoming</p>
+              <div class="upcoming-event">
+                <span class="event-title">Monthly Client's Meet</span>
+                <span class="event-date"> </br>8 April, 2022 04:00 PM</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+          </div>
+        </div>
+      </div>
+      
+
+
+      <!-- Settings Section -->
+      <div
+        id="settings"
+        class="content-section"
+        style="display: none">
+        <div
+          id="settingsMainContent"
+          class="main-content">
+          <!-- Display general information about the user -->
+          <div
+            class="profile-info"
+            style="grid-column: 1">
+            <img
+              src="/dashboard/profile-pic.png"
+              alt="Profile Picture"
+              id="profilePicture"
+              class="profile-picture" />
+            <div class="user-info">
+              <h2 id="userName">Mr. Khaled</h2>
+              <p id="jobTitle">Marketing Specialist</p>
+              <p id="location">Riyadh</p>
+            </div>
+            <div class="contact">
+              <p class="contact"><strong>Contact:</strong></p>
+              <p
+                id="email"
+                class="contact">
+                Mrkhalid876@gmail.com
+              </p>
+              <p
+                id="phone"
+                class="contact">
+                05xxxxxxxx
+              </p>
+            </div>
+          </div>
+
+          <div style="grid-column: 1">
+            <input
+              type="file"
+              id="fileInput"
+              class="input"
+              style="display: none" />
+            <button
+              id="changeImageButton"
+              class="action-button"
+              onclick="triggerFileInput()">
+              Change Picture
+            </button>
+          </div>
+
+          <!-- Display possible options in the settings -->
+          <div
+            class="settings-options"
+            style="grid-column: 1">
+            <div>
+              <p
+                class="option"
+                id="changeName">
+                Change Name
+              </p>
+              <label
+                id="nameLabel"
+                for="newNameInput"
+                class="label"
+                style="display: none"
+                >Name:</label
+              >
+              <input
+                type="text"
+                id="newNameInput"
+                class="input"
+                style="display: none" />
+              <button
+                id="changeNameButton"
+                class="toggle-button on"
+                style="display: none">
+                Change
+              </button>
+              <button
+                id="cancelNameButton"
+                class="toggle-button off"
+                style="display: none">
+                Cancel
+              </button>
+            </div>
+
+            <div>
+              <p
+                class="option"
+                id="changeJob">
+                Change Job Title
+              </p>
+              <label
+                id="jobLabel"
+                for="newJobInput"
+                class="label"
+                style="display: none"
+                >Job Title:</label
+              >
+              <input
+                type="text"
+                id="newJobInput"
+                class="input"
+                style="display: none" />
+              <button
+                id="changeJobButton"
+                class="toggle-button on"
+                style="display: none">
+                Change
+              </button>
+              <button
+                id="cancelJobButton"
+                class="toggle-button off"
+                style="display: none">
+                Cancel
+              </button>
+            </div>
+
+            <div>
+              <p
+                class="option"
+                id="notifications">
+                Notifications
+              </p>
+              <p
+                id="notificationsStatus"
+                style="display: none">
+                Notifications: On
+              </p>
+              <button
+                id="notificationsOn"
+                class="toggle-button on"
+                onclick="setNotifications('On')"
+                style="display: none">
+                On
+              </button>
+              <button
+                id="notificationsOff"
+                class="toggle-button off"
+                onclick="setNotifications('Off')"
+                style="display: none">
+                Off
+              </button>
+            </div>
+
+            <div>
+              <p
+                class="option"
+                id="changeContact">
+                Change Contact
+              </p>
+              <label
+                id="emailLabel"
+                for="newEmailInput"
+                class="label"
+                style="display: none"
+                >Email:</label
+              >
+              <input
+                type="text"
+                id="newEmailInput"
+                class="input"
+                style="display: none" />
+              <label
+                id="phoneLabel"
+                for="newPhoneInput"
+                class="label"
+                style="display: none"
+                >Phone:</label
+              >
+              <input
+                type="text"
+                id="newPhoneInput"
+                class="input"
+                style="display: none" />
+              <button
+                id="changeContactButton"
+                class="toggle-button on"
+                style="display: none">
+                Change
+              </button>
+              <button
+                id="cancelContactButton"
+                class="toggle-button off"
+                style="display: none">
+                Cancel
+              </button>
+            </div>
+
+            <div>
+              <p
+                class="option"
+                id="changeLocation">
+                Change Location
+              </p>
+              <label
+                id="locationLabel"
+                for="newLocationInput"
+                class="label"
+                style="display: none"
+                >Location:</label
+              >
+              <input
+                type="text"
+                id="newLocationInput"
+                class="input"
+                style="display: none" />
+              <button
+                id="changeLocationButton"
+                class="toggle-button on"
+                style="display: none">
+                Change
+              </button>
+              <button
+                id="cancelLocationButton"
+                class="toggle-button off"
+                style="display: none">
+                Cancel
+              </button>
+            </div>
+
+            <div>
+              <p
+                class="option"
+                id="changePassword">
+                Change Password
+              </p>
+              <label
+                id="oldPasswordLabel"
+                for="oldPasswordInput"
+                class="label"
+                style="display: none"
+                >Old Password:</label
+              >
+              <input
+                type="password"
+                id="oldPasswordInput"
+                class="input"
+                style="display: none" />
+              <label
+                id="newPasswordLabel"
+                for="newPasswordInput"
+                class="label"
+                style="display: none"
+                >New Password:</label
+              >
+              <input
+                type="password"
+                id="newPasswordInput"
+                class="input"
+                style="display: none" />
+              <button
+                id="changePasswordButton"
+                class="toggle-button on"
+                style="display: none">
+                Change
+              </button>
+              <button
+                id="cancelPasswordButton"
+                class="toggle-button off"
+                style="display: none">
+                Cancel
+              </button>
+            </div>
+          </div>
+
+          <!-- Display availability and buttons to quickly change the availability status-->
+          <div
+            class="availability"
+            style="grid-column: 2">
+            <p
+              id="status"
+              style="padding: 4px; font-size: 20pt">
+              Status: Available
+            </p>
+            <label style="padding: 4px">Availability</label>
+            <button
+              class="toggle-button on"
+              onclick="setStatus('Available')">
+              On
+            </button>
+            <button
+              class="toggle-button off"
+              onclick="setStatus('Busy')">
+              Off
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Logout Section -->
+      <div
+        id="logout"
+        class="content-section"
+        style="display: none">
+        <div
+          id="logoutConfirmation"
+          class="logout-confirmation">
+          <div class="logout-message">
+            <div class="logout-icon">
+              <img
+                src="/dashboard/check-icon.png"
+                alt="Logout Success" />
+            </div>
+            <p>Logout Successful</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Header Icons Section -->
+      <div class="top-right-icons">
+        <div class="header-icons">
+          <div class="icon-container">
+            <button
+              class="icon-button message-icon"
+              id="messageButton">
+              <img
+                src="/dashboard/messages-icon.png"
+                alt="Messages" />
+            </button>
+            <div
+              class="dropdown-menu"
+              id="messageDropdown"
+              style="display: none">
+              <p>No new messages</p>
+            </div>
+          </div>
+
+          <div class="icon-container">
+            <button
+              class="icon-button notification-icon"
+              id="notificationButton">
+              <img
+                src="/dashboard/bell-icon.png"
+                alt="Notifications" />
+              <span class="notification-dot"></span>
+            </button>
+            <div
+              class="dropdown-menu"
+              id="notificationDropdown"
+              style="display: none">
+              <p>You have 3 new notifications</p>
+              <ul>
+                <li>New client request</li>
+                <li>Upcoming meeting reminder</li>
+                <li>Profile update confirmed</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="user-profile">
+            <span>Mr. Khaled</span>
+            <img
+              src="/dashboard/profile-pic.png"
+              alt="Profile Picture"
+              class="profile-pic" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="/dashboard/HR.js"></script>
+  </body>
+</html>
